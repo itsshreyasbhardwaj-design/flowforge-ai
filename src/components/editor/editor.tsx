@@ -22,13 +22,11 @@ const AUTOSAVE_DELAY_MS = 900;
 export function Editor({
   workflowId,
   initialGraph,
-  initialName,
   publishedVersion,
   draftVersion,
 }: {
   workflowId: string;
   initialGraph: Workflow;
-  initialName: string;
   publishedVersion?: number;
   draftVersion: number;
 }) {
@@ -252,12 +250,13 @@ export function Editor({
           <Icons.ChevronLeft className="size-4" />
         </Link>
 
+        {/* Controlled only. The store is seeded from `initialGraph`, so a defaultValue here
+            would make React treat the field as both controlled and uncontrolled. */}
         <input
           value={graph.name}
           onChange={(e) => useEditor.getState().setMeta({ name: e.target.value })}
           aria-label="Workflow name"
           className="text-ink hover:border-border focus-visible:focus-ring max-w-xs min-w-0 rounded-md border border-transparent bg-transparent px-2 py-1 text-sm font-semibold transition-colors"
-          defaultValue={initialName}
         />
 
         <div className="text-ink-subtle flex items-center gap-1.5 text-[11px]">

@@ -429,8 +429,8 @@ Report vulnerabilities per [SECURITY.md](SECURITY.md).
 
 | Status | Item                                                                                                                                                                                                         |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| ✅     | Execution engine, plugin SDK, 31 nodes, canvas, debugger, versioning + diff, evaluation, observability, REST/webhook deployment, encrypted credentials, marketplace, MCP client node                         |
-| 🚧     | Postgres store adapter; run-resume from a suspended approval; Playwright E2E coverage                                                                                                                        |
+| ✅     | Execution engine, plugin SDK, 31 nodes, canvas, debugger, versioning + diff, evaluation, observability, REST/webhook deployment, encrypted credentials, marketplace, MCP client node, Playwright E2E in CI   |
+| 🚧     | Postgres store adapter; run-resume from a suspended approval; broader E2E coverage                                                                                                                           |
 | 📋     | Collaborative multiplayer editing; scheduled-trigger worker; plugin registry + `npx flowforge add`; pgvector and Qdrant adapters; LLM-as-judge eval metrics; FlowForge as an _MCP server_, not just a client |
 
 Marketplace ratings and download counts are currently local-only — there is no

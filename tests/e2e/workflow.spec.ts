@@ -7,6 +7,14 @@ import { expect, test } from '@playwright/test';
  */
 test.describe('workflow lifecycle', () => {
   test('installs a template, runs it, and shows a trace', async ({ page, request }) => {
+    // React Flow logs one error per edge if it is handed edges before the custom
+    // nodes' handles have registered. It recovers, but the noise hides real
+    // errors, so a clean console is part of the contract.
+    const consoleErrors: string[] = [];
+    page.on('console', (message) => {
+      if (message.type() === 'error') consoleErrors.push(message.text());
+    });
+
     await page.goto('/marketplace');
     await expect(page.getByRole('heading', { name: 'Marketplace' })).toBeVisible();
     await expect(page.getByText('RAG Question Answering')).toBeVisible();
@@ -17,8 +25,12 @@ test.describe('workflow lifecycle', () => {
     const { workflow } = (await install.json()) as { workflow: { id: string } };
 
     await page.goto(`/workflows/${workflow.id}`);
-    await expect(page.getByRole('button', { name: /^Run$/ })).toBeVisible();
+    // Run appears twice by design — once in the toolbar, once in the debugger.
+    await expect(page.getByRole('button', { name: /^Run$/ })).toHaveCount(2);
     await expect(page.getByText('Valid')).toBeVisible();
+    // The installed template must render as a real graph, not just a header.
+    await expect(page.locator('.react-flow__node')).toHaveCount(9);
+    await expect(page.locator('.react-flow__edge')).toHaveCount(9);
 
     const run = await request.post(`/api/workflows/${workflow.id}/run`, {
       data: {
@@ -38,6 +50,10 @@ test.describe('workflow lifecycle', () => {
     // Retrieval found the document, so the LLM branch ran and the fallback did not.
     expect(trace.order).toContain('answer');
     expect(trace.usage.totalTokens).toBeGreaterThan(0);
+
+    expect(consoleErrors, `unexpected console errors:\n${consoleErrors.join('\n')}`).toEqual(
+      [],
+    );
 
     await page.goto('/runs');
     await expect(page.getByText('succeeded').first()).toBeVisible();

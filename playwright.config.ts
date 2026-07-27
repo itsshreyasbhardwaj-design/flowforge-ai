@@ -22,11 +22,14 @@ export default defineConfig({
 
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
 
+  // Tests run against a production build, not `next dev`. Dev-mode compiles each
+  // route on first request, which made timings depend on which worker got there
+  // first — and it is the built artifact users actually run.
   webServer: {
-    command: 'pnpm dev',
+    command: 'pnpm build && pnpm start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 240_000,
     env: { FLOWFORGE_DATA_FILE: '.flowforge/e2e-store.json' },
   },
 });

@@ -28,7 +28,6 @@ export default async function WorkflowEditorPage({ params }: Params) {
     <Editor
       workflowId={id}
       initialGraph={graph}
-      initialName={record.name}
       draftVersion={record.draftVersion}
       publishedVersion={record.publishedVersion}
     />
