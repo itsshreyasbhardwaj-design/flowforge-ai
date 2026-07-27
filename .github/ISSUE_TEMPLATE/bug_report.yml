@@ -1,0 +1,86 @@
+name: Bug report
+description: Something behaves incorrectly
+labels: ['bug', 'needs triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. A workflow export and a run id reproduce almost
+        anything and save a round trip.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you observe, and what did you expect instead?
+      placeholder: The Condition node fired both branches when the value was empty.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflow
+    attributes:
+      label: Workflow export
+      description: Paste the workflow JSON, with any secrets removed.
+      render: json
+
+  - type: input
+    id: run-id
+    attributes:
+      label: Run id
+      description: From the Runs page, if the bug happened during execution.
+      placeholder: run_a1b2c3d4
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Execution engine
+        - Canvas / editor
+        - Debugger
+        - A specific node
+        - Evaluation
+        - Observability
+        - Deployment / API
+        - Versioning
+        - Plugin SDK
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: 0.1.0 / a1b2c3d
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: macOS 15, Node 22.3, pnpm 9.12, Chrome 130
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: offline
+    attributes:
+      label: Configuration
+      options:
+        - label: This reproduces with the default offline configuration (no API keys set)
+        - label: I am using a live model provider
+        - label: I have checked existing issues for a duplicate
