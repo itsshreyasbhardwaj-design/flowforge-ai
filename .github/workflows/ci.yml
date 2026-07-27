@@ -23,9 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Version comes from `packageManager` in package.json — specifying it here
+      # too makes the action error on the mismatch.
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
 
       - uses: actions/setup-node@v4
         with:
@@ -58,8 +58,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 11
       - uses: actions/setup-node@v4
         with:
           node-version: 22
