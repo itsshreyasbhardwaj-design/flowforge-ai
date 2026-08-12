@@ -30,11 +30,25 @@ async function build(): Promise<Runtime> {
   const store = await new FileStore(defaultStorePath()).load();
   const registry = createRegistry();
 
-  const masterKey =
-    process.env.FLOWFORGE_SECRET_KEY ?? 'flowforge-development-key-do-not-use-in-prod';
+  const masterKey = process.env.FLOWFORGE_SECRET_KEY;
+  if (!masterKey && process.env.NODE_ENV === 'production') {
+    throw new Error(
+      'FLOWFORGE_SECRET_KEY is not set. Refusing to start in production — this key ' +
+        'encrypts every credential stored in FlowForge.',
+    );
+  }
+  if (!masterKey) {
+    console.warn(
+      '[flowforge] FLOWFORGE_SECRET_KEY not set — using an ephemeral dev-only key. ' +
+        'It is regenerated on every restart, so credentials encrypted with it will not ' +
+        'survive a reload. Set FLOWFORGE_SECRET_KEY before deploying anywhere real.',
+    );
+  }
+  // Never a fixed, published string: a missing key gets a fresh random one per boot.
+  const effectiveKey = masterKey ?? randomBytes(32).toString('hex');
   const stored = await store.listCredentials();
   const credentialVault = new EncryptedVault(
-    masterKey,
+    effectiveKey,
     new Map(stored.map((c) => [c.key, c.ciphertext])),
   );
 
