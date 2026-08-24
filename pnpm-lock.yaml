@@ -63,7 +63,7 @@ importers:
         version: 12.42.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       nanoid:
         specifier: '>=3.3.17'
-        version: 6.0.0
+        version: 6.0.1
       next:
         specifier: 16.2.11
         version: 16.2.11(@babel/core@7.29.7(supports-color@7.2.0))(@playwright/test@1.62.0)(@types/node@20.19.43)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2043,6 +2043,7 @@ packages:
   eslint@9.39.5:
     resolution: {integrity: sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -2601,8 +2602,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  nanoid@6.0.0:
-    resolution: {integrity: sha512-mkUH+rPkwU2qPadJ0oJZOjeZ5Mxn8Q1UhevwkTRWNuUZzyia3h4rhzK39hxaHTk0o2OxB8W2SQ6A8k23ZDi1pQ==}
+  nanoid@6.0.1:
+    resolution: {integrity: sha512-3wVS3i51pE2pi1k5FFL/95BGfVS0kSsvDVuGXHOtxox/TywUmtgq+3qiTOTbs9J7KfHaXPiN171k/A6dBnaXFw==}
     engines: {node: ^22 || ^24 || >=26}
     hasBin: true
 
@@ -5853,7 +5854,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  nanoid@6.0.0: {}
+  nanoid@6.0.1: {}
 
   napi-postinstall@0.3.4: {}
 
@@ -6027,7 +6028,7 @@ snapshots:
 
   postcss@8.5.23:
     dependencies:
-      nanoid: 6.0.0
+      nanoid: 6.0.1
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
