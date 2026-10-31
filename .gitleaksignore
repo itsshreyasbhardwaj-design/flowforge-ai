@@ -1,0 +1,19 @@
+# gitleaks allowlist — audited exceptions only.
+#
+# Every fingerprint below was inspected during an account-wide security audit
+# and confirmed to be a deliberate test fixture, an example in documentation,
+# a redaction/secret-scanning test's own input, or vendored upstream code.
+# None is a live credential.
+#
+# This file lists FINGERPRINTS, not paths or rules, on purpose: a fingerprint
+# pins one specific finding at one location. A NEW secret added to any of the
+# same files still fails the scan. Do not replace these with path globs.
+#
+# If a finding here ever turns out to be real, delete its line rather than
+# editing it, so the scanner reports it again.
+
+# tests/kernel.test.ts  [generic-api-key]
+tests/kernel.test.ts:generic-api-key:173
+
+# tests/kernel.test.ts  [generic-api-key]
+3f0ddcd0ffe8675d4d11f39f631fa93a292d4cfa:tests/kernel.test.ts:generic-api-key:173
